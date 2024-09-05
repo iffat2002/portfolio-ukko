@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import {  usePathname } from 'next/navigation'; // Import useRouter
 
 const HeaderHolder = ({
   open,
@@ -14,46 +15,72 @@ const HeaderHolder = ({
 }) => {
   const [activeSection, setActiveSection] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const sections = [
-    "home",
-    "services",
-    "about",
-    "portfolio",
-    "blog",
-    "skills",
-    "contact",
-  ];
+  const sections = ["home", "services", "about", "portfolio", "blog", "skills", "contact"];
+  
 
+  const pathname = usePathname()
+  const isHomePage = pathname === "/"; // Check if it's the home page
+console.log("router path name", pathname)
   useEffect(() => {
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          setActiveSection(id);
-          const pageIndex = sections.indexOf(id) + 1;
-          setCurrentPage(pageIndex);
-        }
+    if (isHomePage) {
+      const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            setActiveSection(id);
+            const pageIndex = sections.indexOf(id) + 1;
+            setCurrentPage(pageIndex);
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(handleIntersection, {
+        threshold: 0.4, // Adjust the threshold as needed
       });
-    };
 
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.4, // Adjust the threshold as needed
-    });
-
-    sections.forEach((section) => {
-      const sectionElement = document.getElementById(section);
-      if (sectionElement) {
-        observer.observe(sectionElement);
-      }
-    });
-
-    return () => {
       sections.forEach((section) => {
         const sectionElement = document.getElementById(section);
         if (sectionElement) {
-          observer.unobserve(sectionElement);
+          observer.observe(sectionElement);
         }
       });
+
+      return () => {
+        sections.forEach((section) => {
+          const sectionElement = document.getElementById(section);
+          if (sectionElement) {
+            observer.unobserve(sectionElement);
+          }
+        });
+      };
+    } else {
+      // If not the home page, reset to 1 for current page and active section
+      setActiveSection("home");
+      setCurrentPage(1);
+    }
+  }, [sections, isHomePage]);
+
+  useEffect(() => {
+    // Function to handle hash-based navigation
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1);
+      if (sections.includes(hash)) {
+        const sectionElement = document.getElementById(hash);
+        if (sectionElement) {
+          sectionElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    // Add event listener for hash change
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Handle initial load
+    handleHashChange();
+
+    return () => {
+      // Clean up event listener
+      window.removeEventListener("hashchange", handleHashChange);
     };
   }, [sections]);
 
@@ -75,10 +102,14 @@ const HeaderHolder = ({
               }}
               className="current-num"
             >
-              <span>{`0${currentPage}`}</span>
+              {/* Show current page based on condition */}
+              <span>{`0${isHomePage ? currentPage : 1}`}</span>
             </motion.div>
             <div className="pagination-div">/</div>
-            <div className="total-pages-num">{`0${sections.length}`}</div>
+            <div className="total-pages-num">
+              {/* Show total pages based on condition */}
+              {`0${isHomePage ? sections.length : 1}`}
+            </div>
           </div>
           <div className="site-title">JACOB HAWKINS</div>
           <div className="menu-holder">
@@ -95,7 +126,7 @@ const HeaderHolder = ({
                       className={`one-page-section menu-item menu-item-type-custom menu-item-object-custom menu-item-${section} ${
                         activeSection === section ? "current" : ""
                       }`}
-                      onClick={()=> close()}
+                      onClick={() => close()}
                     >
                       <a href={`/#${section}`}>
                         {section.charAt(0).toUpperCase() + section.slice(1)}

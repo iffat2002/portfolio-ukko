@@ -9,7 +9,7 @@ const Blog = () => {
              <div className="elementor-widget-wrap elementor-element-populated">
                 <div className="elementor-element elementor-element-442532ad elementor-widget elementor-widget-heading" data-id="442532ad" data-element_type="widget" data-widget_type="heading.default">
                    <div className="elementor-widget-container">
-                      <h2 className="elementor-heading-title elementor-size-default">BLOG</h2>
+                      <h2 className="elementor-heading-title elementor-size-default blog_weight">BLOG</h2>
                    </div>
                 </div>
                 <div className="elementor-element elementor-element-7c29fe38 elementor-widget__width-initial elementor-widget elementor-widget-text-editor" data-id="7c29fe38" data-element_type="widget" data-widget_type="text-editor.default">
@@ -19,7 +19,7 @@ const Blog = () => {
                    <div className="elementor-widget-container">
                       <ul className="home-blog-list">
                          <li>
-                            <h4 className="entry-title"><a href="/blog/hundreds-of-thousands-a-still-more-glorious-nights-around-art-table/">Hundreds of thousands a still more glorious nights around art table</a></h4>
+                            <h4 className="entry-title"><a className="blog_weight" href="/blog/hundreds-of-thousands-a-still-more-glorious-nights-around-art-table/">Hundreds of thousands a still more glorious nights around art table</a></h4>
                             <div className="blog-list-info">
                                <div className="entry-date published">Nov 28, 2019</div>
                                <div className="cat-links-wrapper">
@@ -30,7 +30,7 @@ const Blog = () => {
                             </div>
                          </li>
                          <li>
-                            <h4 className="entry-title"><a href="/blog/preserve-and-cherish-that-pale-blue-dot-are-creatures-of-the-cosmos-light-years/">Preserve and cherish that pale blue dot are creatures of the cosmos light years</a></h4>
+                            <h4 className="entry-title"><a  className="blog_weight"  href="/blog/preserve-and-cherish-that-pale-blue-dot-are-creatures-of-the-cosmos-light-years/">Preserve and cherish that pale blue dot are creatures of the cosmos light years</a></h4>
                             <div className="blog-list-info">
                                <div className="entry-date published">Nov 27, 2019</div>
                                <div className="cat-links-wrapper">
@@ -41,7 +41,7 @@ const Blog = () => {
                             </div>
                          </li>
                          <li>
-                            <h4 className="entry-title"><a href="blog/great-turbulent-clouds-hearts-of-the-stars-stirred-by-starlight-sky-culture/">Great turbulent clouds hearts of the stars stirred by starlight sky culture</a></h4>
+                            <h4 className="entry-title"><a  className="blog_weight"  href="blog/great-turbulent-clouds-hearts-of-the-stars-stirred-by-starlight-sky-culture/">Great turbulent clouds hearts of the stars stirred by starlight sky culture</a></h4>
                             <div className="blog-list-info">
                                <div className="entry-date published">Nov 26, 2019</div>
                                <div className="cat-links-wrapper">

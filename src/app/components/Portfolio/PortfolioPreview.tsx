@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import ToggleHolder from "@/app/components/ToggleHolder/ToggleHolder";
 import Link from "next/link";
 
@@ -45,7 +45,7 @@ const data = [
     title: "INSPIRATION",
     subtitle:
       "Two ghostly white figures in coveralls and helmets are softly.",
-    desc: `Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus. Vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor.`,
+    desc: `Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus bangelis rich in heavy atomolo lorem lipsum forte bimiola.`,
   },
 ];
  
@@ -96,12 +96,14 @@ const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ slug, onBack }) => 
     </div>
   </div>
 
- </div>) : <div className="nature-preview">
+ </div>) : null }
+ {current.slug ==="item-3" ? (<div className="nature-preview">
  <div className="content_data" style={{marginTop:"0px"}}>
             <h1>{current.title}</h1>
-            <h3>{current.subtitle}</h3>
+            <h3 style={{width:'100%'}}>{current.subtitle}</h3>
             <p dangerouslySetInnerHTML={{ __html: current.desc }}></p>
-           
+            <p>Descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor lorem lipsum optom poresiose mullu.</p>
+            <a href="/blog/hundreds-of-thousands-a-still-more-glorious-nights-around-art-table/"><div className="block center-relative more-posts-portfolio-holder"><span className="more-posts-portfolio">READ MORE</span><span className="more-posts-portfolio-loading">LOADING</span><span className="no-more-posts-portfolio">NO MORE</span></div> </a>
           </div> 
           <img    src='/photo-1.jpg'
                                           fetchPriority="high" 
@@ -116,13 +118,13 @@ const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ slug, onBack }) => 
                                           sizes="(max-width: 536px) 100vw, 536px"
                                        /> 
    
- </div> }
+ </div>): null}
       {current.slug === "item-1" ? (
         <>
-          <Swiper
+          <Swiper style={{ "--swiper-pagination-bullet-inactive-color": "#999999", "--swiper-pagination-bullet-inactive-opacity": "1",}}
             spaceBetween={0}
             slidesPerView={1}
-            modules={[Pagination]}
+            modules={[Pagination, Autoplay]}
             pagination={{
               el: ".custom-pagination",
               clickable: true,
@@ -131,6 +133,10 @@ const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ slug, onBack }) => 
                   index + 1
                 }</span>`;
               },
+            }}
+            autoplay={{
+              delay: 4000, // Delay between slides (in milliseconds)
+              disableOnInteraction: false, // Autoplay will not be disabled after user interaction
             }}
             className="swiper-portfolio"
           >

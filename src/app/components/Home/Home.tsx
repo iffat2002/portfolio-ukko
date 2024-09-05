@@ -19,7 +19,7 @@ const Home = () => {
                               <div className="elementor-element elementor-element-61546de elementor-widget elementor-widget-coco-home-section" data-id="61546de" data-element_type="widget" data-widget_type="coco-home-section.default">
                                  <div className="elementor-widget-container">
                                     <div className="home-section extra-width">
-                                       <h1 className="entry-title global-color" data-jarallax-element="0 30">
+                                       <h1 style={{position:"absolute"}} className="entry-title global-color" data-jarallax-element="0 30">
                                           Hello <br/>I'm <span>Jacob<br/> Hawkins</span>
                                           <div id="jarallax-container-0">
                                              <div></div>
