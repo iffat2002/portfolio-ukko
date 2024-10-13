@@ -1261,14 +1261,14 @@ div.pp_default .pp_description {
   .simple-image-slider-pagination.swiper-pagination {
     margin-bottom: 15px;
   }
-  .detils{
+  .details{
     flex-direction: column;
     gap: 0px !important;
     justify-content: left;
     align-items: flex-start !important;
     margin-bottom: 25px !important;
   }
-  .detils span{
+  .details span{
     line-height: normal;
     font-weight: 500;
   }
@@ -13742,7 +13742,7 @@ h1.entry-title {
   line-height: 120%;
   padding: 20px 0px 10px;
 }
-.content_data_blog .detils {
+.content_data_blog .details {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -14187,4 +14187,19 @@ body{
 }
 .footer-800{
   max-width:800px;
+}
+.pt-0{
+  padding-top:0px;
+}
+.p-85{
+padding: 85px 0px;
+}
+.mt-15{
+  margin-top:15px;
+}
+.mb-0{
+  margin-bottom:0px;
+}
+.mb-20{
+  margin-bottom: 20px;
 }

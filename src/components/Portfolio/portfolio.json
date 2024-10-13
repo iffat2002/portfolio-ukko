@@ -1,17 +1,29 @@
 [
     {
-      "id": 1,
-      "slug": "item-1",
-  "layout": "swiper-layout",
+      "id": 65,
+      "layoutNo": "layout1",
+     "layout": "swiper-layout",
       "imgs": ["/images/item1.jpg", "/images/item2.jpg", "/images/item3.jpg"],
      "title": "ART OF CAMERA",
       "subtitle":
         "Two ghostly white figures in coveralls and helmets are softly dancing lorem ipsum.",
-      "desc": "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus. Vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor."
+      "desc": "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus. Vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor.",
+      "size": "p_one",
+      "datatop": "0px",
+      "dataleft": "0%",
+      "function": "handlePortfolioClick",
+      "width": 800,
+      "height": 400,
+      "img-src": "/imges/portfolio1.jpg",
+      "srcset": "/images/portfolio1.jpg 800w, /images/portfolio1-300x150.jpg 300w, /images/portfolio1-768x384.jpg 768w",
+      "imagesizes": "(max-width: 800px) 100vw, 800px",
+      "portfolio-text": "Sneakers",
+      "portfolio-cat":  "text"
+
     },
     {
-      "id": 2,
-      "slug": "item-2",
+      "id": 62,
+      "layoutNo": "layout2",
       "layout": "simple-layout",
       "imgs": [
         "/images/image_blog_01.jpg",
@@ -23,12 +35,22 @@
       "texts": [
         "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor proin sit amet mauris.",
         "Veleifend amet, ullamcorper lacus vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor."
-      ]
-      
+      ],
+      "size": "p_one_half",
+      "datatop": "450px",
+      "dataleft": "0%",
+      "function": "handlePortfolioClick",
+      "width": 400,
+      "height": 800,
+      "img-src": "/images/portfolio2-1.jpg",
+      "srcset": "/images/portfolio2-1.jpg 400w, /images/portfolio2-1-150x300.jpg 150w",
+      "imagesizes": "(max-width: 400px) 100vw, 400px",
+      "portfolio-text": "Stairways",
+      "portfolio-cat":  "text"
     },
     {
-      "id": 3,
-      "slug": "item-3",
+      "id": 59,
+      "layoutNo": "layout3",
       "layout": "grid-layout",
       "imgs": [
         "/images/photo-1.jpg"
@@ -39,23 +61,56 @@
         "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus bangelis rich in heavy atomolo lorem lipsum forte bimiola.",
         "Descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor lorem lipsum optom poresiose mullu."
       ],
-      "link": "/blog/hundreds-of-thousands-a-still-more-glorious-nights-around-art-table/"
+      "link": "/blog/hundreds-of-thousands-a-still-more-glorious-nights-around-art-table/",
+      "size": "p_one_half",
+      "datatop": "450px",
+      "dataleft": "50%",
+      "function": "handlePortfolioClick",
+      "width": 400,
+      "height": 400,
+      "img-src": "/images/portfolio3-1.jpg",
+      "srcset": "/images/portfolio3-1.jpg 400w, /images/portfolio3-1-300x300.jpg 300w, /images/portfolio3-1-150x150.jpg 150w",
+      "imagesizes": "(max-width: 400px) 100vw, 400px",
+      "portfolio-text": "Nature",
+      "portfolio-cat":  "Text"
     },
     {
       "id": 4,
-      "slug": "item-4",
+      "layoutNo": "layout4",
       "layout": "video-overlay",
-      "url":"https://player.vimeo.com/video/199192931"
+      "url":"https://player.vimeo.com/video/199192931",
+      "size": "p_one_half",
+      "datatop": "900px",
+      "dataleft": "50%",
+      "function": "getOverlay",
+      "width": 400,
+      "height": 400,
+      "img-src": "/images/portfolio4-1.jpg",
+      "srcset": "/images/portfolio4-1.jpg 400w, /images/portfolio4-1-300x300.jpg 300w, /images/portfolio4-1-150x150.jpg 150w",
+      "imagesizes": "(max-width: 400px) 100vw, 400px",
+      "portfolio-text": "Architecture",
+      "portfolio-cat":  "Video"
 
     },
     {
-      "id": 5,
-      "slug": "item-5",
+      "id": 69,
+      "layoutNo": "layout5",
       "layout": "slider-overlay",
       "url":"https://player.vimeo.com/video/199192931",
       "content":[
         { "type": "image", "img": "/images/item2.jpg" },
         { "type": "video", "videoSrc": "https://player.vimeo.com/video/199192931" }
-      ]
+      ],
+      "size": "p_one",
+      "datatop": "1350px",
+      "dataleft": "0%",
+      "function": "getOverlay",
+      "width": 800,
+      "height": 400,
+      "img-src": "/images/portfolio5-1.jpg",
+      "srcset": "/images/portfolio5-1.jpg 800w, /images/portfolio5-1.jpg 300w, /images/portfolio5-1.jpg 768w",
+      "imagesizes": "(max-width: 800px) 100vw, 800px",
+      "portfolio-text": "Art",
+      "portfolio-cat":  "Text"
     }
   ]

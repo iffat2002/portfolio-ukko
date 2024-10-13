@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../../blog.json";
+import data from "./blog.json";
 import {motion} from 'framer-motion'
 const Blog = () => {
   return (

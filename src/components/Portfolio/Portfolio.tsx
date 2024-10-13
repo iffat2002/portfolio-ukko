@@ -111,47 +111,45 @@ const Portfolio = () => {
       if (itemIdAttr) {
         const itemId = itemIdAttr.split("-")[2];
         const slug = `item-${itemId}`;
-        item.addEventListener("click", () => handlePortfolioClick(slug, Number(itemId)));
+        item.addEventListener("click", () =>
+          handlePortfolioClick(slug, Number(itemId))
+        );
       }
     };
-  
+
     const removeClickListener = (item: Element) => {
       const itemIdAttr = item.getAttribute("id");
       if (itemIdAttr) {
         const itemId = itemIdAttr.split("-")[2];
         const slug = `item-${itemId}`;
-        item.removeEventListener("click", () => handlePortfolioClick(slug, Number(itemId)));
+        item.removeEventListener("click", () =>
+          handlePortfolioClick(slug, Number(itemId))
+        );
       }
     };
-  
+
     items.forEach(addClickListener);
-  
+
     return () => {
       items.forEach(removeClickListener);
     };
   }, []);
-  
-  //////////////////////////////
 
-  // Append new grid items and re-layout when `clicked` is true
   useEffect(() => {
     if (clicked && isotopeInstance.current) {
-      // Reinitialize Isotope after adding new elements
       const newGridItems = document.querySelectorAll(".new-grid-item");
       isotopeInstance.current.appended(newGridItems);
       isotopeInstance.current.layout();
     }
   }, [clicked, gridItems]);
 
- 
   const handleBack = () => {
     setSelectedSlug(null);
-
   };
 
   const [layoutData, setLayoutData] = useState("");
   const getOverlay = (slug: string) => {
-    const current = data.filter((item) => item.slug === slug)[0];
+    const current = data.filter((item) => item.layoutNo === slug)[0];
     setLayoutData(current);
     setIsModalOpen(true);
   };
@@ -173,29 +171,30 @@ const Portfolio = () => {
         ...prevItems,
         <div
           key={`new-item-${prevItems.length}`}
-          className="grid-item element-item p_one new-grid-item"
-          data-top="1350px"
+          id={`p-item-${data[4].id}`}
+          onClick={() =>
+            functionMap[data[4].function](data[4].layoutNo, data[4].id)
+          }
+          className={`grid-item element-item ${data[4].size}`}
+          data-top={data[4].datatop}
+          data-left={data[4].dataleft}
         >
-          <a
-            className="item-link ajax-portfolio"
-            data-id="69"
-            onClick={() => getOverlay("item-5")}
-          >
+          <a className="item-link ajax-portfolio" data-id={data[4].id}>
             <img
               loading="lazy"
               decoding="async"
-              width="800"
-              height="400"
-              src="/images/portfolio5-1.jpg"
+              width={data[4].width}
+              height={data[4].height}
+              src={data[4]["img-src"]}
               className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
               alt=""
-              srcSet="/images/portfolio5-1.jpg 800w, /images/portfolio5-1.jpg 300w, /images/portfolio5-1.jpg 768w"
-              sizes="(max-width: 800px) 100vw, 800px"
+              srcSet={data[4].srcset}
+              sizes={data[4].imagesizes}
             />
             <div className="portfolio-text-holder">
               <div className="portfolio-text-wrapper">
-                <p className="portfolio-text">Art</p>
-                <p className="portfolio-cat">Text</p>
+                <p className="portfolio-text">{data[4]["portfolio-text"]}</p>
+                <p className="portfolio-cat">{data[4]["portfolio-cat"]}</p>
               </div>
             </div>
           </a>
@@ -224,7 +223,10 @@ const Portfolio = () => {
       setHasMorePosts(false);
     }
   }, [loading, clicked]);
-
+  const functionMap = {
+    handlePortfolioClick,
+    getOverlay,
+  };
   return (
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-51c27d18 op-section extra-width extra-width-portfolio elementor-section-full_width elementor-section-height-default elementor-section-height-default"
@@ -271,7 +273,7 @@ const Portfolio = () => {
               </div>
             </div>
             {isPreviewVisible && selectedSlug ? (
-              <PortfolioPreview slug={selectedSlug} onBack={handleBack} />
+              <PortfolioPreview layoutNo={selectedSlug} onBack={handleBack} />
             ) : (
               <div
                 className={`elementor-element elementor-element-1b02fb93 elementor-widget elementor-widget-coco-portfolio ${
@@ -286,122 +288,48 @@ const Portfolio = () => {
                     <div className="portfolio-load-content-holder content-670"></div>
                     <div className="grid" id="portfolio-grid">
                       <div className="grid-sizer"></div>
-                      <div
-                        id="p-item-65"
-                        onClick={() => handlePortfolioClick("item-1", 65)}
-                        className="grid-item element-item p_one"
-                        data-top="0px"
-                        data-left="0%"
-                      >
-                        <a className="item-link ajax-portfolio" data-id="65">
-                          <img
-                            loading="lazy"
-                            decoding="async"
-                            width="800"
-                            height="400"
-                            src="/imges/portfolio1.jpg"
-                            className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                            alt=""
-                            srcSet="/images/portfolio1.jpg 800w, /images/portfolio1-300x150.jpg 300w, /images/portfolio1-768x384.jpg 768w"
-                            sizes="(max-width: 800px) 100vw, 800px"
-                          />
-                          <div className="portfolio-text-holder">
-                            <div className="portfolio-text-wrapper">
-                              <p className="portfolio-text">Sneakers</p>
-                              <p className="portfolio-cat">Text</p>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                      <div
-                        id="p-item-62"
-                        onClick={() => handlePortfolioClick("item-2", 62)}
-                        className="grid-item element-item p_one_half"
-                        data-top="450px"
-                        data-left="0%"
-                      >
-                        <a className="item-link ajax-portfolio" data-id="62">
-                          <img
-                            loading="lazy"
-                            decoding="async"
-                            width="400"
-                            height="800"
-                            src="/images/portfolio2-1.jpg"
-                            className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                            alt=""
-                            srcSet="/images/portfolio2-1.jpg 400w, /images/portfolio2-1-150x300.jpg 150w"
-                            sizes="(max-width: 400px) 100vw, 400px"
-                          />
-                          <div className="portfolio-text-holder">
-                            <div className="portfolio-text-wrapper">
-                              <p className="portfolio-text">Stairways</p>
-                              <p className="portfolio-cat">Text</p>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                      <div
-                        id="p-item-59"
-                        onClick={() => handlePortfolioClick("item-3", 59)}
-                        className="grid-item element-item p_one_half"
-                        data-top="450px"
-                        data-left="50%"
-                      >
-                        <a className="item-link ajax-portfolio" data-id="59">
-                          <img
-                            loading="lazy"
-                            decoding="async"
-                            width="400"
-                            height="400"
-                            src="/images/portfolio3-1.jpg"
-                            className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                            alt=""
-                            srcSet="/images/portfolio3-1.jpg 400w, /images/portfolio3-1-300x300.jpg 300w, /images/portfolio3-1-150x150.jpg 150w"
-                            sizes="(max-width: 400px) 100vw, 400px"
-                          />
-                          <div className="portfolio-text-holder">
-                            <div className="portfolio-text-wrapper">
-                              <p className="portfolio-text">Nature</p>
-                              <p className="portfolio-cat">Text</p>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                      <div
-                        className="grid-item element-item p_one_half"
-                        data-top="900px"
-                        data-left="50%"
-                      >
-                        <a
-                          className="item-link"
-                          // onClick={() =>
-                          //   handleItemClick(
-                          //     "https://player.vimeo.com/video/199192931"
-                          //   )
-                          // }
-                          onClick={() => getOverlay("item-4")}
-                          data-rel="prettyPhoto[portfolio1]"
-                          rel="prettyPhoto[portfolio1]"
+
+                      {/* mapping thorugh json data for grid layout */}
+
+                      {data.slice(0, 4).map((item) => (
+                        <div
+                          key={item.id}
+                          id={`p-item-${item.id}`}
+                          onClick={() =>
+                            functionMap[item.function](item.layoutNo, item.id)
+                          }
+                          className={`grid-item element-item ${item.size}`}
+                          data-top={item.datatop}
+                          data-left={item.dataleft}
                         >
-                          <img
-                            loading="lazy"
-                            decoding="async"
-                            width="400"
-                            height="400"
-                            src="/images/portfolio4-1.jpg"
-                            className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                            alt=""
-                            srcSet="/images/portfolio4-1.jpg 400w, /images/portfolio4-1-300x300.jpg 300w, /images/portfolio4-1-150x150.jpg 150w"
-                            sizes="(max-width: 400px) 100vw, 400px"
-                          />
-                          <div className="portfolio-text-holder">
-                            <div className="portfolio-text-wrapper">
-                              <p className="portfolio-text">Architecture</p>
-                              <p className="portfolio-cat">Video</p>
+                          <a
+                            className="item-link ajax-portfolio"
+                            data-id={item.id}
+                          >
+                            <img
+                              loading="lazy"
+                              decoding="async"
+                              width={item.width}
+                              height={item.height}
+                              src={item["img-src"]}
+                              className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
+                              alt=""
+                              srcSet={item.srcset}
+                              sizes={item.imagesizes}
+                            />
+                            <div className="portfolio-text-holder">
+                              <div className="portfolio-text-wrapper">
+                                <p className="portfolio-text">
+                                  {item["portfolio-text"]}
+                                </p>
+                                <p className="portfolio-cat">
+                                  {item["portfolio-cat"]}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </a>
-                      </div>
+                          </a>
+                        </div>
+                      ))}
 
                       {gridItems.map((item) => item)}
                     </div>
@@ -433,10 +361,7 @@ const Portfolio = () => {
       </motion.div>
       {/* Overlay Layouts */}
       {layoutData?.layout === "video-overlay" && isModalOpen && (
-        <VideoOverlay
-          url={layoutData.url}
-          closeModal={closeModal} // Pass the close function
-        />
+        <VideoOverlay url={layoutData.url} closeModal={closeModal} />
       )}
       {layoutData?.layout === "slider-overlay" && isModalOpen && (
         <SliderOverlay

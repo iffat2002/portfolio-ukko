@@ -11,15 +11,15 @@ import SimpleLayout from "./Layouts/SimpleLayout";
 
 
 interface PortfolioPreviewProps {
-  slug: string;
+  layoutNo: string;
   onBack: () => void;
 }
 
 const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({
-  slug,
+  layoutNo,
   onBack,
 }) => {
-  const current = data.filter((item) => item.slug === slug)[0];
+  const current = data.filter((item) => item.layoutNo === layoutNo)[0];
   const [open, setOpen] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const openMenu = () => setOpen(!open);

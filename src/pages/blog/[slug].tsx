@@ -6,7 +6,7 @@ import ToggleHolder from "../../components/ToggleHolder/ToggleHolder";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import data from "../../blog.json";
+import data from "../../components/Blog/blog.json";
 
 const BlogPage = () => {
   const router = useRouter();
@@ -51,10 +51,10 @@ const BlogPage = () => {
                   <div className="content_wrap_blog">
                     <div className="content_data_blog">
                       <h1>{current.title}</h1>
-                      <div className="detils">
+                      <div className="details">
                         <span>{current.author}</span>{" "}
                         <span>{current.date}</span>{" "}
-                        <span style={{ color: "#f44647" }}>
+                        <span className="global-color ">
                           {current.category}
                         </span>
                       </div>
@@ -87,8 +87,8 @@ const BlogPage = () => {
                         <div className="divider">.</div>
                         <Link
                           href={`/blog/${data[currentIndex - 1]?.slug}`}
-                          className="item text-center md:text-right"
-                          style={{ marginBottom: "20px" }}
+                          className="item text-center md:text-right mb-20"
+                         
                         >
                           {data[currentIndex - 1] && (
                             <>
