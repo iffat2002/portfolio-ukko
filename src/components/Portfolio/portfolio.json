@@ -1,0 +1,61 @@
+[
+    {
+      "id": 1,
+      "slug": "item-1",
+  "layout": "swiper-layout",
+      "imgs": ["/images/item1.jpg", "/images/item2.jpg", "/images/item3.jpg"],
+     "title": "ART OF CAMERA",
+      "subtitle":
+        "Two ghostly white figures in coveralls and helmets are softly dancing lorem ipsum.",
+      "desc": "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus. Vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor."
+    },
+    {
+      "id": 2,
+      "slug": "item-2",
+      "layout": "simple-layout",
+      "imgs": [
+        "/images/image_blog_01.jpg",
+         "/images/image_blog_02.jpg"  
+      ],
+      "title": "PHOTO SESSION",
+      "subtitle": "Two ghostly white figures in coveralls and helmets are softly dancing lorem ipsum.",
+      "desc": "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus. Vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor.",
+      "texts": [
+        "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor proin sit amet mauris.",
+        "Veleifend amet, ullamcorper lacus vangelis rich in heavy atoms descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor."
+      ]
+      
+    },
+    {
+      "id": 3,
+      "slug": "item-3",
+      "layout": "grid-layout",
+      "imgs": [
+        "/images/photo-1.jpg"
+      ],
+      "title": "INSPIRATION",
+      "subtitle": "Two ghostly white figures in coveralls and helmets are softly.",
+      "desc": [
+        "Cras pretium metus pulvinar ultricies auctor. In varius purus blandit sem mollis tristique. Curabitur sed lorem vel ligula pulvinar porttitor. Proin sit amet mauris eleifend amet, ullamcorper lacus bangelis rich in heavy atomolo lorem lipsum forte bimiola.",
+        "Descended from astronomers dream of the mind’s cras pretium metus pulvinar ultricies auctor lorem lipsum optom poresiose mullu."
+      ],
+      "link": "/blog/hundreds-of-thousands-a-still-more-glorious-nights-around-art-table/"
+    },
+    {
+      "id": 4,
+      "slug": "item-4",
+      "layout": "video-overlay",
+      "url":"https://player.vimeo.com/video/199192931"
+
+    },
+    {
+      "id": 5,
+      "slug": "item-5",
+      "layout": "slider-overlay",
+      "url":"https://player.vimeo.com/video/199192931",
+      "content":[
+        { "type": "image", "img": "/images/item2.jpg" },
+        { "type": "video", "videoSrc": "https://player.vimeo.com/video/199192931" }
+      ]
+    }
+  ]
