@@ -14034,13 +14034,12 @@ text-align: end;
   cursor: pointer;
 }
 
-.grid-item.new-item {
-  transform: scale(0);
-  transition: transform 0.5s ease-in-out;
-}
 
-.grid-item.new-item.show {
-  transform: scale(1);
+.new-itemm{
+      opacity: 1;
+    transition-property: opacity, transform;
+    transition-duration: 0.7s;
+    transition-delay: 0.5ms;
 }
 
 .more-posts-portfolio-holder {
