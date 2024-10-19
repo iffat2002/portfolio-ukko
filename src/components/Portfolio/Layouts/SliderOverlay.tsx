@@ -37,7 +37,7 @@ const SliderOverlay = ({ slide, url, closeModal, content }) => {
   const footer=`overlay-footer ${isVideoSlide ?  'overlay-footer':'footer-800'}`;
   return (
     <div className="overlay" onClick={handleOverlayClick}>
-      <div className="overlay-content">
+      <div className={`overlay-content ${isVideoSlide ? 'vid-slider' : 'image-slider'}`}>
         <Slider
           {...settings}
           ref={sliderRef}

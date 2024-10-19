@@ -209,9 +209,7 @@ div.pp_pic_holder {
   height: 20px;
   position: relative;
 }
-* html .pp_top {
-  padding: 0 20px;
-}
+
 .pp_top .pp_left {
   height: 20px;
   left: 0;
@@ -224,10 +222,7 @@ div.pp_pic_holder {
   position: absolute;
   right: 20px;
 }
-* html .pp_top .pp_middle {
-  left: 0;
-  position: static;
-}
+
 .pp_top .pp_right {
   height: 20px;
   left: auto;
@@ -240,9 +235,7 @@ div.pp_pic_holder {
   height: 40px;
   min-width: 40px;
 }
-* html .pp_content {
-  width: 40px;
-}
+
 .pp_fade {
   display: none;
 }
@@ -382,9 +375,7 @@ a.pp_close {
   height: 20px;
   position: relative;
 }
-* html .pp_bottom {
-  padding: 0 20px;
-}
+
 .pp_bottom .pp_left {
   height: 20px;
   left: 0;
@@ -397,10 +388,7 @@ a.pp_close {
   position: absolute;
   right: 20px;
 }
-* html .pp_bottom .pp_middle {
-  left: 0;
-  position: static;
-}
+
 .pp_bottom .pp_right {
   height: 20px;
   left: auto;
@@ -2343,6 +2331,7 @@ body {
   font-weight: 400;
   color: #000;
   overflow-x: hidden;
+  width: 100%;
   position: relative;
 }
 body:before {
@@ -2397,7 +2386,7 @@ strong {
 }
 #content {
   line-height: 30px;
-  position: relative;
+  
  
 }
 .content-holder {
@@ -2610,6 +2599,9 @@ h1.entry-title.page-title {
   position: relative;
   height: 30px;
   color: #f44647;
+}
+.cursor-p{
+  cursor:pointer;
 }
 .current-num span {
   position: absolute;
@@ -13704,8 +13696,8 @@ h1.entry-title {
 }
 .slide-content {
   width: 100%;
- 
 }
+
 .slide-content .slide_img_portfolio {
   width: 100%;
   height: auto;
@@ -14059,23 +14051,32 @@ text-align: end;
 display:flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* Ensure it overlays other content */
+  z-index: 9999; 
 }
 
 .overlay-content {
   position: relative;
-
   z-index:1000;
  height:auto;
-  width:824px;
-  
-  @media (min-height: 790px) {
-    width: 85vw; /* 90% of the viewport width */
-  }
-  @media (max-width: 600px) {
-    width: 89vw; /* 90% of the viewport width */
-  }
+  max-width:784px;
+  width:90%;
+ .image-slider{
+  max-width:800px;
+  margin-bottom: 50px;
+
+ }
+ @media (max-width: 768px) {
+  width: 75%; 
 }
+
+}
+.vid-slider{
+  @media (min-width: 1280px) and (max-width: 1300px) {
+   max-width: 83%; 
+ }
+}
+
+
 .overlay-content img {
   width: 100%;
   height: auto;
@@ -14091,6 +14092,7 @@ margin:30px auto 2px auto;
   width: 100%;
   color: white;  
   font-size: 18px;
+ 
 }
 
 
@@ -14119,8 +14121,6 @@ margin:30px auto 2px auto;
 }
 iframe {
   aspect-ratio: 16 / 9;
-
-   /* or another ratio matching your video */
 }
 .custom-prev:hover img {
   transform: translateX(-4px); 
@@ -14178,20 +14178,29 @@ body{
 .video-slide {
   max-width: 100%;
   height: 100%;
+  
+
 }
 
 .image-slide {
   max-width: 800px;
   max-height: 400px;
+ 
 }
 .footer-800{
   max-width:800px;
+   @media (max-width: 768px) {
+    margin: -5px auto 2px auto;
+  }
 }
 .pt-0{
   padding-top:0px;
 }
 .p-85{
 padding: 85px 0px;
+}
+.mt-0{
+  margin-top:0px;
 }
 .mt-15{
   margin-top:15px;
@@ -14201,4 +14210,17 @@ padding: 85px 0px;
 }
 .mb-20{
   margin-bottom: 20px;
+}
+.h-full{
+height:100%;
+}
+.end{
+  justify-content: end;
+}
+html{
+  width:100% !important;
+  overflow-x: hidden;
+}
+#portfolio {
+  min-height: 100vh; 
 }

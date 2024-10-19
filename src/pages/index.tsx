@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { jarallax, jarallaxElement } from "jarallax";
 import { Element, animateScroll as scroll, scrollSpy } from "react-scroll";
 import Head from "next/head";
-import Header from "../components/Header/Header";
 import ToggleHolder from "../components/ToggleHolder/ToggleHolder";
 import HeaderHolder from "../components/HeaderHolder/HeaderHolder";
 import Home from "../components/Home/Home";
@@ -14,7 +13,7 @@ import Blog from "../components/Blog/Blog";
 import Skills from "../components/Skills/Skills";
 import Contact from "../components/Contact/Contact";
 import { motion } from "framer-motion";
-import Footer from "../components/Footer/Footer";
+
 
 export default function Page() {
   const [open, setOpen] = useState(false);
@@ -43,7 +42,6 @@ export default function Page() {
   return (
     <>
       <Head>
-        {/* Page-Specific Meta Tags */}
         <title>Ukko - Personal Portfolio</title>
         <meta name="description" content="A designer portfolio page" />
         <meta name="keywords" content="Next.js, SEO, React" />
@@ -95,7 +93,6 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <Footer />
       </main>
     </>
   );

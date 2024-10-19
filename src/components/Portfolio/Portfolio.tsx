@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { animateScroll as scroll } from "react-scroll";
 import { motion } from "framer-motion";
 import PortfolioPreview from "./PortfolioPreview";
 import Isotope from "isotope-layout";
@@ -11,14 +12,14 @@ const Portfolio = () => {
   const timeoutIds = useRef<(number | NodeJS.Timeout)[]>([]);
   const [fadeOut, setFadeOut] = useState(false);
   const [clicked, setClicked] = useState(false);
-  const [sliceIndex, setSliceIndex]= useState(4);
+  const [sliceIndex, setSliceIndex] = useState(4);
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const portfolioSectionRef = useRef<HTMLElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [gridItems, setGridItems] = useState<JSX.Element[]>([]);
   const isotopeInstance = useRef<any>(null);
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
-const [showOverlay, setShowOverlay] =useState(false)
+
   useEffect(() => {
     const initializeIsotope = async () => {
       const Isotope = (await import("isotope-layout")).default;
@@ -38,7 +39,7 @@ const [showOverlay, setShowOverlay] =useState(false)
       if (isotopeInstance.current) {
         const items = document.querySelectorAll(".grid-item");
         items.forEach((item) => {
-          (item as HTMLElement).style.display = ""; 
+          (item as HTMLElement).style.display = "";
         });
       }
     };
@@ -47,7 +48,7 @@ const [showOverlay, setShowOverlay] =useState(false)
   const fadeOutItems = (items: NodeListOf<Element>, callback: () => void) => {
     let opacity = 1;
     const minOpacity = 0.3;
-    const fadeDuration = 200; //
+    const fadeDuration = 200;
     const fadeStep = (1 - minOpacity) / (fadeDuration / 16);
 
     const fade = () => {
@@ -70,9 +71,9 @@ const [showOverlay, setShowOverlay] =useState(false)
 
   const hideItems = (items: NodeListOf<Element>, callback: () => void) => {
     items.forEach((item) => {
-      (item as HTMLElement).style.display = "none"; // Hide the items
+      (item as HTMLElement).style.display = "none";
     });
-    callback(); 
+    callback();
   };
 
   const scrollToPortfolio = (callback: () => void) => {
@@ -85,30 +86,30 @@ const [showOverlay, setShowOverlay] =useState(false)
   };
 
   const handlePortfolioClick = (id: number, showOverlay: Boolean) => {
-    if(showOverlay === true){
+    if (showOverlay === true) {
       const current = data.filter((item) => item.id === id)[0];
       setLayoutData(current);
       setIsModalOpen(true);
-    } else{
-    const clickedItem = document.getElementById(`p-item-${id}`);
-    const otherItems = document.querySelectorAll(
-      `.grid-item:not(#p-item-${id})`
-    );
+    } else {
+      const clickedItem = document.getElementById(`p-item-${id}`);
+      const otherItems = document.querySelectorAll(
+        `.grid-item:not(#p-item-${id})`
+      );
 
-    if (clickedItem) {
-      clickedItem.classList.remove("fade-out", "hidden");
-    }
-    // Fade out the other items
-    fadeOutItems(otherItems, () => {
-      scrollToPortfolio(() => {
-        hideItems(otherItems, () => {
-          setSelectedSlug(id);
-          setIsPreviewVisible(true);
+      if (clickedItem) {
+        clickedItem.classList.remove("fade-out", "hidden");
+      }
+      // Fade out the other items
+      fadeOutItems(otherItems, () => {
+        scrollToPortfolio(() => {
+          hideItems(otherItems, () => {
+            setSelectedSlug(id);
+            setIsPreviewVisible(true);
+          });
         });
       });
-    });}
+    }
   };
-
 
   const handleBack = () => {
     setSelectedSlug(null);
@@ -131,20 +132,20 @@ const [showOverlay, setShowOverlay] =useState(false)
       isotopeInstance.current.layout();
     }
   }, [clicked, gridItems]);
+
   const handleLoadMoreClick = () => {
+  
+
     setClicked(true);
     setLoading(true);
-    
 
     const timeoutId2 = setTimeout(() => {
-      setGridItems((prevItems) => [
-        ...prevItems,
-      ]);
-      
-      setSliceIndex((prevIndex) => prevIndex + 1);  // Set sliceIndex independently
-      setLoading(false); 
+      setGridItems((prevItems) => [...prevItems]);
+
+      setSliceIndex((prevIndex) => prevIndex + 1);
+      setLoading(false);
     }, 1000);
-  }
+  };
   // Clean up the timeout when the component unmounts
   useEffect(() => {
     return () => {
@@ -161,12 +162,12 @@ const [showOverlay, setShowOverlay] =useState(false)
 
   useEffect(() => {
     if (!loading && clicked) {
-      if(sliceIndex >= data.length){
-      setHasMorePosts(false);
+      if (sliceIndex >= data.length) {
+        setHasMorePosts(false);
       }
     }
   }, [loading, clicked]);
- 
+
   return (
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-51c27d18 op-section extra-width extra-width-portfolio elementor-section-full_width elementor-section-height-default elementor-section-height-default"
@@ -215,12 +216,14 @@ const [showOverlay, setShowOverlay] =useState(false)
             {isPreviewVisible && selectedSlug ? (
               <PortfolioPreview id={selectedSlug} onBack={handleBack} />
             ) : (
-              <ThumbnailGrid   sliceIndex={sliceIndex}
-              gridItems={gridItems}
-              handlePortfolioClick={handlePortfolioClick}
-              handleLoadMoreClick={handleLoadMoreClick}
-              loading={loading}
-              hasMorePosts={hasMorePosts} />
+              <ThumbnailGrid
+                sliceIndex={sliceIndex}
+                gridItems={gridItems}
+                handlePortfolioClick={handlePortfolioClick}
+                handleLoadMoreClick={handleLoadMoreClick}
+                loading={loading}
+                hasMorePosts={hasMorePosts}
+              />
             )}
           </div>
         </div>

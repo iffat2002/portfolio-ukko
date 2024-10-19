@@ -9,18 +9,15 @@ const VideoOverlay = ({url, closeModal}) => {
   };
   return (
     <div className="overlay" onClick={handleOverlayClick}>
-          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+          <div className="overlay-content vid-slider" onClick={(e) => e.stopPropagation()}>
             <iframe
               src={url}
               frameBorder="0"
               allow="autoplay; fullscreen"
               title="Video Modal"
-              style={{
-                maxWidth: "calc(177.778vh)",
-
-              }}
+             
             ></iframe>
-            <div className="overlay-footer" style={{justifyContent:'end'}}>
+            <div className="overlay-footer end" >
               <button className="overlay-close" onClick={closeModal} >
                 <img src="/images/close.png" alt="Close" />
               </button>

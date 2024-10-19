@@ -23,7 +23,6 @@ const BlogPage = () => {
     <>
       {" "}
       <Head>
-        {/* Page-Specific Meta Tags */}
         <title>{current.title}</title>
         <meta name="description" content="A designer portfolio page" />
         <meta name="keywords" content="Next.js, SEO, React" />

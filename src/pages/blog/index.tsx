@@ -17,9 +17,7 @@ const index = () => {
       </Head>
       <main>
         <div id="content" className="site-content center-relative">
-          <div
-            className="blog-content-holder content-800 post-181 p-85 page type-page status-publish hentry"
-          >
+          <div className="blog-content-holder content-800 post-181 p-85 page type-page status-publish hentry">
             <div className="content-670">
               <div
                 data-elementor-type="wp-page"
@@ -66,15 +64,10 @@ const index = () => {
                           className="slide_img_blog"
                         />
                       </div>
-                      <div
-                        className="details mt-15 mb-0"
-                        
-                      >
+                      <div className="details mt-15 mb-0">
                         <span>{current.author}</span>{" "}
                         <span>{current.date}</span>{" "}
-                        <span className="global-color">
-                          {current.category}
-                        </span>
+                        <span className="global-color">{current.category}</span>
                       </div>
                       <h1 className="entry-title pt-0">
                         <a href={`/blog/${current.slug}`}>{current.title}</a>

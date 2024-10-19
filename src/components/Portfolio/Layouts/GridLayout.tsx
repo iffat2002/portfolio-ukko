@@ -2,12 +2,10 @@ import React from 'react';
 
 
 const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
-
   return (
     <div className="nature-preview">
       <div
-        className="elementor-widget-wrap elementor-element-populated content_data"
-        style={{ marginTop: "0px" }}
+        className="elementor-widget-wrap elementor-element-populated content_data mt-0"
       >
         <div
           className="elementor-element elementor-element-81ce8d7 elementor-widget elementor-widget-heading"
@@ -33,7 +31,7 @@ const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
           </div>
         </div>
 
-        {desc.map((desc, index) => (
+        {desc?.map((desc, index) => (
           <div
             key={index}
             className="elementor-element elementor-element-f14a1ee elementor-widget elementor-widget-text-editor"
@@ -50,8 +48,7 @@ const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
 
         <a href={link}>
           <div
-            className="block center-relative more-posts-portfolio-holder"
-            style={{ marginTop: "0px" }}
+            className="block center-relative more-posts-portfolio-holder mt-0"
           >
             <span className="more-posts-portfolio">READ MORE</span>
           </div>

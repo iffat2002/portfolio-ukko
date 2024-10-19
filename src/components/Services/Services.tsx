@@ -81,11 +81,11 @@ const Services = () => {
               </div>
             </div>
             <section
-              className="elementor-section elementor-inner-section elementor-element elementor-element-57f61afc extra-width parallax_0_30 global-background-color elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+              className="elementor-section top-30 elementor-inner-section elementor-element elementor-element-57f61afc extra-width parallax_0_30 global-background-color elementor-section-boxed elementor-section-height-default elementor-section-height-default"
               data-id="57f61afc"
               data-element_type="section"
               data-jarallax-element="0 30"
-              style={{marginTop:'30px'}}
+              
             >
               <div className="elementor-container elementor-column-gap-default">
                 <div
