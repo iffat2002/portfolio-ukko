@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
-import { Link } from "react-scroll";
 
+import { Link, animateScroll as scroll } from "react-scroll";
 const HeaderHolder = ({
   open,
   close,
@@ -21,21 +21,39 @@ const HeaderHolder = ({
   const pathname = usePathname();
   const isHomePage = pathname === "/"; 
   const handleSectionClick = (section: string) => {
-    localStorage.setItem("lastActiveSection", section);
-    console.log("pathname", pathname, "section name:", section )
     if (pathname !== "/") {
+      localStorage.removeItem('scrollPosition')
       router.push(`/#${section}`);
     }
     close(); 
   };
+
+  useEffect(() => {
+    const saveScrollPosition = () => {
+      localStorage.setItem("scrollPosition", window.scrollY.toString());
+    };
+
+    window.addEventListener('beforeunload', saveScrollPosition);
+    
+    return () => {
+      window.removeEventListener('beforeunload', saveScrollPosition);
+    };
+  }, []);
+
   useEffect(() => {
     if (isHomePage) {
+      const scrollPosition = localStorage.getItem("scrollPosition");
+      if (scrollPosition) {
+        window.scrollTo(0, parseInt(scrollPosition, 10));
+        localStorage.removeItem('scrollPosition');
+      }
+    
     const header = document.querySelector('[data-header]');
     const scrollRoot = document.querySelector('[data-scroller]');
     const options = {
-      root: scrollRoot || null, // Fallback to viewport
-      rootMargin: `${header?.offsetHeight * -1}px`, // Adjust for header height
-      threshold: 0, // Trigger when any part of section intersects
+      root: scrollRoot || null, 
+      rootMargin: `${header?.offsetHeight * -1}px`, 
+      threshold: 0, 
     };
 
     const onIntersect = (entries: IntersectionObserverEntry[]) => {
@@ -63,13 +81,15 @@ const HeaderHolder = ({
         const sectionElement = document.getElementById(section);
         if (sectionElement) {
           observer.unobserve(sectionElement);
+        
         }
       });
-    };
+    }
   } else{
     setCurrentPage(1);
   }
   }, [sections, isHomePage]);
+
 
   return (
     <div className={`header-holder ${openVal ? "open" : ""}`}>
@@ -109,6 +129,7 @@ const HeaderHolder = ({
                       spy={true}
                       smooth={true}
                       duration={1500}
+                     
                       onClick={() => handleSectionClick(section)}
                     >
                       {section.charAt(0).toUpperCase() + section.slice(1)}
