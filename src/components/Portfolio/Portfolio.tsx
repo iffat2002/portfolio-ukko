@@ -10,41 +10,7 @@ import VideoOverlay from "./Layouts/VideoOverlay";
 import SliderOverlay from "./Layouts/SliderOverlay";
 import ThumbnailGrid from "./ThumbnailGrid";
 
-// types.d.ts (or any other .ts file)
-export interface PortfolioItem {
-  id: number;
-  showOverlay: boolean;
-  layout: string;
-  imgs: string[];
-  title?: string;
-  subtitle: string;
-  desc: string | string[];
-  imgSrc?: string;
-  srcset: string;
-  imagesizes: string;
-  portfolioText?: string;
-  portfolioCat?: string;
-  thumbnailLayout: string;
-  "img-src": string;
-  "portfolio-text": string;
-  "portfolio-cat": string;
-  link?: string;
-  url?: string;
-  content?: { type: string; img?: string; videoSrc?: string }[];
-  defaultSlide?: number;
-}
-const transformedData: PortfolioItem[] = data.map(item => ({
-  imgSrc: item["img-src"],
-  portfolioText: item["portfolio-text"],
-  portfolioCat: item["portfolio-cat"],
-  imgs: item.imgs || [],
-  id: item.id,
-  showOverlay: item.showOverlay,
-  layout: item.layout,
-  title: item.title || "", // Provide a fallback empty string for optional fields
-  subtitle: item.subtitle || "",
-  desc: item.desc || "",
-}));
+
 
 const Portfolio = () => {
   const timeoutIds = useRef<(number | NodeJS.Timeout)[]>([]);
@@ -122,11 +88,11 @@ const Portfolio = () => {
 
   const handlePortfolioClick = (id: number, showOverlay: Boolean) => {
     if (showOverlay === true) {
-      const current: PortfolioItem | undefined = transformedData.filter((item) => item.id === id)[0];
-      if (current) {
+      const current=data.filter((item) => item.id === id)[0];
+    
       setLayoutData(current)
       setIsModalOpen(true);
-      }
+      
     } else {
       const clickedItem = document.getElementById(`p-item-${id}`);
       const otherItems = document.querySelectorAll(

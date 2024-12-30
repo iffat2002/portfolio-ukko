@@ -8,7 +8,7 @@ const VideoOverlay: React.FC<VideoOverlayProps> = ({ url, closeModal }) => {
     if (event.target instanceof HTMLElement && event.target.classList.contains("overlay")) {
       closeModal();
     }
-  };
+  };console.log("url", url)
 
   return (
     <div className="overlay" onClick={handleOverlayClick}>
