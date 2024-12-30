@@ -1,5 +1,5 @@
-import { React } from "react";
-import thumbnailLayouts from "../../util/Thumbnail-layouts";
+
+import thumbnailLayouts from "../../util/thumbnail-layouts";
 import data from "./portfolio.json";
 
 type ThumbnailGridProps = {
