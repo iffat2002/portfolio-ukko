@@ -1,13 +1,16 @@
 import { Events, animateScroll as scroll, scrollSpy } from "react-scroll";
 import type { Metadata } from "next";
-import React, { useEffect } from "react";
+import React, { useEffect, ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "Portfolio",
   description: "a designer portfolio page",
 };
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+  children: ReactNode;
+}
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     // Registering the 'begin' event and logging it to the console when triggered.
     Events.scrollEvent.register("begin", (to, element) => {});
