@@ -1,0 +1,87 @@
+{
+    "section": {
+      "content": [
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "SKILLS"
+        },
+        {
+          "type": "subheading",
+          "text": "Lorem ipsum dolor sit amet consectetu adipiscing elit viverra tristique placerat"
+        },
+        {
+          "type": "text",
+          "text": "Viverra tristique placerat in sat massa consectetur quisque. Nunc aces fames lectus in libero aliquet ertare feraso est lorem nunc dolor sit amet settera aces volutpat in voltare lupar est phasellus. Faucibus sed tristique fames sed aliquet ultricies eget viverra arcu."
+        },
+        {
+          "type": "timeline",
+          "items": [
+            {
+              "date": "2016",
+              "text": "<b>2015 - 2016</b> placerat in massa consectetur quisque. Nunc ac fames lectus in libero aliquet est setera nunc."
+            },
+            {
+              "date": "2017",
+              "text": "<b>2016 - 2017</b> Turpis metus sit diam purus leo in variusquam. Nunc amet tristique volutpat adipiscing vulputate phasellus. Eget enim aliquam euismod mauris in vitae viverra blandit lectus diam feugiat."
+            },
+            {
+              "date": "2019",
+              "text": "<b>2017 - 2019</b> Nunc amet tristique volutpat adipiscing vulputate phasellus. Eget enim aliquam euismod."
+            },
+            {
+              "date": "2023",
+              "text": "<b>2019 - 2023</b> Eget enim aliquam euismod mauris in vitae viverra blandit lectus faucibus diam consequat maecenas turpis metus sit diam purus leo in varius."
+            }
+          ]
+        },
+        {
+          "type": "skills",
+          "columns": [
+            {
+            "id": "4d35a9fb",
+              "skills": [
+                {
+                  "name": "PHOTOSHOP",
+                  "fill": "78%"
+                },
+                {
+                  "name": "MARKETING",
+                  "fill": "38%"
+                },
+                {
+                  "name": "AFFINITY",
+                  "fill": "55%"
+                },
+                {
+                  "name": "EDUCATION",
+                  "fill": "87%"
+                }
+              ]
+            },
+            {  "id" : "58db6117",
+              "skills": [
+                {
+                  "name": "ILLUSTRATOR",
+                  "fill": "42%"
+                },
+                {
+                  "name": "CREATIVITY",
+                  "fill": "92%"
+                },
+                {
+                  "name": "LANGUAGES",
+                  "fill": "70%"
+                },
+                {
+                  "name": "DEVELOPING",
+                  "fill": "52%"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+  

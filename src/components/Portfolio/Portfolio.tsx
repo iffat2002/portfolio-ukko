@@ -4,10 +4,48 @@ import { animateScroll as scroll } from "react-scroll";
 import { motion } from "framer-motion";
 import PortfolioPreview from "./PortfolioPreview";
 import Isotope from "isotope-layout";
+import thumbnailLayouts from "../../util/thumbnail-layouts";
 import data from "./portfolio.json";
 import VideoOverlay from "./Layouts/VideoOverlay";
 import SliderOverlay from "./Layouts/SliderOverlay";
 import ThumbnailGrid from "./ThumbnailGrid";
+
+// types.d.ts (or any other .ts file)
+export interface PortfolioItem {
+  id: number;
+  showOverlay: boolean;
+  layout: string;
+  imgs: string[];
+  title?: string;
+  subtitle: string;
+  desc: string | string[];
+  imgSrc?: string;
+  srcset: string;
+  imagesizes: string;
+  portfolioText?: string;
+  portfolioCat?: string;
+  thumbnailLayout: string;
+  "img-src": string;
+  "portfolio-text": string;
+  "portfolio-cat": string;
+  link?: string;
+  url?: string;
+  content?: { type: string; img?: string; videoSrc?: string }[];
+  defaultSlide?: number;
+}
+const transformedData: PortfolioItem[] = data.map(item => ({
+  imgSrc: item["img-src"],
+  portfolioText: item["portfolio-text"],
+  portfolioCat: item["portfolio-cat"],
+  imgs: item.imgs || [],
+  id: item.id,
+  showOverlay: item.showOverlay,
+  layout: item.layout,
+  title: item.title || "", // Provide a fallback empty string for optional fields
+  subtitle: item.subtitle || "",
+  desc: item.desc || "",
+}));
+
 const Portfolio = () => {
   const timeoutIds = useRef<(number | NodeJS.Timeout)[]>([]);
   const [fadeOut, setFadeOut] = useState(false);
@@ -19,11 +57,14 @@ const Portfolio = () => {
   const [gridItems, setGridItems] = useState<JSX.Element[]>([]);
   const isotopeInstance = useRef<any>(null);
   const [isPreviewVisible, setIsPreviewVisible] = useState(false);
+  const [layoutData, setLayoutData] = useState("");
+  const [slide, setSlide] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [hasMorePosts, setHasMorePosts] = useState(true);
 
   useEffect(() => {
     const initializeIsotope = async () => {
       const Isotope = (await import("isotope-layout")).default;
-
       isotopeInstance.current = new Isotope(".grid", {
         percentPosition: true,
         itemSelector: ".grid-item",
@@ -32,9 +73,7 @@ const Portfolio = () => {
         },
       });
     };
-
     initializeIsotope();
-
     return () => {
       if (isotopeInstance.current) {
         const items = document.querySelectorAll(".grid-item");
@@ -50,22 +89,18 @@ const Portfolio = () => {
     const minOpacity = 0.3;
     const fadeDuration = 200;
     const fadeStep = (1 - minOpacity) / (fadeDuration / 16);
-
     const fade = () => {
       opacity -= fadeStep;
       opacity = Math.max(opacity, minOpacity);
-
       items.forEach((item) => {
         (item as HTMLElement).style.opacity = `${opacity}`;
       });
-
       if (opacity > minOpacity) {
         requestAnimationFrame(fade);
       } else {
         callback();
       }
     };
-
     requestAnimationFrame(fade);
   };
 
@@ -87,15 +122,16 @@ const Portfolio = () => {
 
   const handlePortfolioClick = (id: number, showOverlay: Boolean) => {
     if (showOverlay === true) {
-      const current = data.filter((item) => item.id === id)[0];
-      setLayoutData(current);
+      const current: PortfolioItem | undefined = transformedData.filter((item) => item.id === id)[0];
+      if (current) {
+      setLayoutData(current)
       setIsModalOpen(true);
+      }
     } else {
       const clickedItem = document.getElementById(`p-item-${id}`);
       const otherItems = document.querySelectorAll(
         `.grid-item:not(#p-item-${id})`
       );
-
       if (clickedItem) {
         clickedItem.classList.remove("fade-out", "hidden");
       }
@@ -110,21 +146,14 @@ const Portfolio = () => {
       });
     }
   };
-
   const handleBack = () => {
     setSelectedSlug(null);
   };
-
-  const [layoutData, setLayoutData] = useState("");
-
-  const [slide, setSlide] = useState(null);
   const closeModal = () => {
     setIsModalOpen(false);
     setSlide(layoutData?.defaultSlide);
   };
 
-  const [loading, setLoading] = useState(false);
-  const [hasMorePosts, setHasMorePosts] = useState(true);
   useEffect(() => {
     if (clicked && isotopeInstance.current) {
       const newGridItems = document.querySelectorAll(".new-grid-item");
@@ -134,17 +163,74 @@ const Portfolio = () => {
   }, [clicked, gridItems]);
 
   const handleLoadMoreClick = () => {
-  
-
     setClicked(true);
     setLoading(true);
-
-    const timeoutId2 = setTimeout(() => {
-      setGridItems((prevItems) => [...prevItems]);
-
-      setSliceIndex((prevIndex) => prevIndex + 1);
-      setLoading(false);
-    }, 1000);
+    setSliceIndex((prevIndex) => prevIndex + 1);
+    if (sliceIndex < data.length) {
+      const timeoutId5 = setTimeout(() => {
+        setGridItems((prevItems) => [
+          ...prevItems,
+          <div key={`new-item-${prevItems.length}`}>
+            {data[sliceIndex] && (
+              <div key={`item-${sliceIndex}`}>
+                <div
+                  id={`p-item-${data[sliceIndex].id}`}
+                  onClick={() =>
+                    handlePortfolioClick(
+                      data[sliceIndex].id,
+                      data[sliceIndex].showOverlay
+                    )
+                  }
+                  className={`grid-item element-item new-grid-item ${
+                    thumbnailLayouts[data[sliceIndex].thumbnailLayout].size
+                  } `}
+                  data-top={
+                    thumbnailLayouts[data[sliceIndex].thumbnailLayout].datatop
+                  }
+                  data-left={
+                    thumbnailLayouts[data[sliceIndex].thumbnailLayout].dataleft
+                  }
+                >
+                  <a
+                    className="item-link ajax-portfolio"
+                    data-id={data[sliceIndex].id}
+                  >
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      width={
+                        thumbnailLayouts[data[sliceIndex].thumbnailLayout].width
+                      }
+                      height={
+                        thumbnailLayouts[data[sliceIndex].thumbnailLayout]
+                          .height
+                      }
+                      src={data[sliceIndex]["img-src"]}
+                      className="attachment-post-thumbnail size-post-thumbnail wp-post-image"
+                      alt=""
+                      srcSet={data[sliceIndex].srcset}
+                      sizes={data[sliceIndex].imagesizes}
+                    />
+                    <div className="portfolio-text-holder">
+                      <div className="portfolio-text-wrapper">
+                        <p className="portfolio-text">
+                          {data[sliceIndex]["portfolio-text"]}
+                        </p>
+                        <p className="portfolio-cat">
+                          {data[sliceIndex]["portfolio-cat"]}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>,
+        ]);
+        setLoading(false);
+      }, 1000);
+      timeoutIds.current.push(timeoutId5);
+    }
   };
   // Clean up the timeout when the component unmounts
   useEffect(() => {
@@ -153,6 +239,7 @@ const Portfolio = () => {
       timeoutIds.current = [];
     };
   }, []);
+
   useEffect(() => {
     if (isotopeInstance.current) {
       isotopeInstance.current.reloadItems();

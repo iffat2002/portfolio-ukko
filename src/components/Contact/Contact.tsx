@@ -1,23 +1,62 @@
 import React, { useState } from "react";
 import { jarallax, jarallaxVideo } from "jarallax";
 import "jarallax/dist/jarallax.min.css";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
+
+type FormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
 const Contact = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [subject, setSubject] = useState<string>("");
-
-  const handleInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  const handleInputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setSubmitSuccess(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+      if (!response.ok) {
+        throw new Error("Failed to submit the form. Please try again.");
+      }
+      setSubmitSuccess(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error: any) {
+      setSubmitError(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleInputSubject = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSubject(e.target.value);
-  };
+  const { name, email, subject, message } = formData;
+
   return (
     <section
       className="elementor-section elementor-top-section elementor-element elementor-element-3889ef3f op-section elementor-section-full_width elementor-section-height-default elementor-section-height-default"
@@ -25,9 +64,12 @@ const Contact = () => {
       data-element_type="section"
       id="contact"
     >
-      <motion.div   initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }} className="elementor-container elementor-column-gap-no">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="elementor-container elementor-column-gap-no"
+      >
         <div
           className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-102358d5"
           data-id="102358d5"
@@ -167,80 +209,54 @@ const Contact = () => {
                       ></p>
                       <ul></ul>
                     </div>
+                    {/* Form submission feedback */}
+                    {submitSuccess && (
+                      <p>Thank you! Your message has been sent.</p>
+                    )}
+                    {submitError && (
+                      <p style={{ color: "red" }}>{submitError}</p>
+                    )}
                     <form
+                      onSubmit={handleSubmit}
                       action="/ukko-wp/#wpcf7-f8-p181-o1"
                       method="post"
                       className="wpcf7-form init demo"
                       aria-label="Contact form"
-                      noValidate="novalidate"
                       data-status="init"
                     >
-                      <div>
-                        <input type="hidden" name="_wpcf7" value="8" readOnly />
-                        <input
-                          type="hidden"
-                          name="_wpcf7_version"
-                          value="5.9.4"
-                          readOnly
-                        />
-                        <input
-                          type="hidden"
-                          name="_wpcf7_locale"
-                          value="en_US"
-                          readOnly
-                        />
-                        <input
-                          type="hidden"
-                          name="_wpcf7_unit_tag"
-                          value="wpcf7-f8-p181-o1"
-                          readOnly
-                        />
-                        <input
-                          type="hidden"
-                          name="_wpcf7_container_post"
-                          value="181"
-                          readOnly
-                        />
-                        <input
-                          type="hidden"
-                          name="_wpcf7_posted_data_hash"
-                          value=""
-                          readOnly
-                        />
-                      </div>
                       <p>
                         <span
                           className="wpcf7-form-control-wrap"
                           data-name="your-name"
                         >
                           <input
-                            size="40"
+                            size={40}
                             className="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
                             aria-required="true"
                             aria-invalid="false"
                             placeholder="NAME"
                             value={name}
-                            onChange={handleInputName}
+                            onChange={handleInputChange}
                             type="text"
-                            name="your-name"
+                            name="name"
                           />
                         </span>
                       </p>
                       <p>
                         <span
                           className="wpcf7-form-control-wrap"
-                          data-name="your-email"
+                          data-name="email"
                         >
                           <input
-                            size="40"
+                            size={40}
                             className="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email"
                             aria-required="true"
                             aria-invalid="false"
                             placeholder="EMAIL"
                             value={email}
-                            onChange={handleInputEmail}
+                            onChange={handleInputChange}
                             type="email"
-                            name="your-email"
+                            name="email"
                           />
                         </span>
                       </p>
@@ -250,14 +266,14 @@ const Contact = () => {
                           data-name="your-subject"
                         >
                           <input
-                            size="40"
+                            size={40}
                             className="wpcf7-form-control wpcf7-text"
                             aria-invalid="false"
                             placeholder="SUBJECT"
                             value={subject}
-                            onChange={handleInputSubject}
+                            onChange={handleInputChange}
                             type="text"
-                            name="your-subject"
+                            name="subject"
                           />
                         </span>
                       </p>
@@ -267,16 +283,18 @@ const Contact = () => {
                           data-name="your-message"
                         >
                           <textarea
-                            cols="40"
-                            rows="10"
+                            cols={40}
+                            rows={10}
                             className="wpcf7-form-control wpcf7-textarea"
                             aria-invalid="false"
                             placeholder="MESSAGE"
-                            name="your-message"
+                            name="message"
+                            value={message}
+                            onChange={handleInputChange}
                           ></textarea>
                         </span>
                       </p>
-                      <p className="contact-submit-holder">
+                      <button className="contact-submit-holder">
                         <input
                           className="wpcf7-form-control wpcf7-submit has-spinner"
                           type="submit"
@@ -284,7 +302,7 @@ const Contact = () => {
                           readOnly
                         />
                         <span className="wpcf7-spinner"></span>
-                      </p>
+                      </button>
                       <div
                         className="wpcf7-response-output"
                         aria-hidden="true"
@@ -301,4 +319,4 @@ const Contact = () => {
   );
 };
 
-export default Contact
+export default Contact;

@@ -14033,6 +14033,14 @@ text-align: end;
     transition-duration: 0.7s;
     transition-delay: 0.5ms;
 }
+.new-item{
+  opacity: 1;
+transition-property: opacity, transform;
+transition-duration: 0.7s;
+transition-delay: 0.5ms;
+
+
+}
 
 .more-posts-portfolio-holder {
   cursor: pointer;
@@ -14223,4 +14231,7 @@ html{
 }
 #portfolio {
   min-height: 100vh; 
+}
+.contact-submit-holder{
+  width:100%
 }

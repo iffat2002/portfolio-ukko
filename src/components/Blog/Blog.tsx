@@ -1,6 +1,7 @@
 import React from "react";
 import data from "./blog.json";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
+
 const Blog = () => {
   return (
     <section
@@ -9,9 +10,12 @@ const Blog = () => {
       data-element_type="section"
       id="blog"
     >
-      <motion.div   initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }} className="elementor-container elementor-column-gap-no">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="elementor-container elementor-column-gap-no"
+      >
         <div
           className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-2acffe1b"
           data-id="2acffe1b"
@@ -81,7 +85,6 @@ const Blog = () => {
               data-widget_type="coco-button.default"
             >
               <div className="elementor-widget-container">
-                {" "}
                 <a href="/blog" className="service-link slow-scroll">
                   READ MORE
                 </a>

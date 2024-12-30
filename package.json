@@ -25,9 +25,12 @@
     "swiper": "^11.1.10"
   },
   "devDependencies": {
+    "@types/isotope-layout": "^3.0.14",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-scroll": "^1.8.10",
+    "@types/react-slick": "^0.23.13",
     "css-loader": "^7.1.1",
     "mini-css-extract-plugin": "^2.9.0",
     "postcss": "^8",

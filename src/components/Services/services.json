@@ -1,0 +1,97 @@
+{
+    "elements": [
+      {
+        "type": "heading",
+        "id": "384378cf",
+        "content": "SERVICES"
+      },
+      {
+        "type": "text",
+        "id": "7d4f5dea",
+        "widget":"elementor-widget__width-initial",
+        "content": "Lorem ipsum dolor sit amet consectetu adipiscing elit viverra tristique placerat"
+      },
+      {
+        "type": "text",
+        "id": "37b6602f",
+        "widget":"elementor-widget",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra tristique placerat in sat massa consectetur quisque. Nunc aces fames lectus in libero aliquet ertare feraso est lorem nunc dolor sit amet settera aces volutpat in voltare lupar est phasellus."
+      },
+      {
+        "type": "text",
+        "id": "7f6fafcf",
+        "widget":"elementor-widget",
+        "content": "<p>Faucibus sed tristique fames sed aliquet ultricies eget viverra arcu. Vitae faucibus diam consequat aecenas. Turpis metus sit diam purus leo in varius ac quam. Nunc amet tristique set volutpat <a href='#'><strong>estars adipiscing</strong></a> vulputate est phasellus. Volutpat faucibus per praesent aced nuncare voltare per settera lorem ipsum dolor.</p>"
+      },
+      {
+        "type": "section",
+        "data-id": "57f61afc",
+        "content": [
+          {
+            "id": "7ef5761",
+            "text": "DOWNLOAD CV",
+            "link": "https://demo.cocobasic.com/documentation/MANUAL-UkkoWP.pdf",
+            "target": "_blank"
+          },
+          {
+            "id": "98209e5",
+            "text": "MY PORTFOLIO",
+            "link": "#portfolio"
+          }
+        ]
+      },
+      {
+        "type": "services",
+        "id": "43003c58",
+        "content": [
+          {
+            "type": "service",
+            "image": "/images/ser1.png",
+            "title": "DESIGN",
+            "id":"63b921ef",
+            "subid": "3a987b85",
+            "titleid": "692dba67",
+            "descid": "4f6c4455",
+            "description": "A full stack allaround designer that may or may not include a guide for specific createive"
+          },
+          {
+            "type": "service",
+            "image": "/images/ser2.png",
+            "title": "DEVELOP",
+            "id": "177c0dfb",
+            "subid": "1844e2e6",
+            "titleid": "4366ecc1",
+            "descid":"29223719",
+            "description": "Tellus pharetra erat tristique erat donec dignissim etiam sed malesuada enim sodales"
+          }
+        ]
+      },
+      {
+        "type": "services",
+        "data-id": "78609315",
+        "content": [
+          {
+            "type": "service",
+            "image": "/images/ser3.png",
+            "title": "WRITE",
+            "id":"134323c7",
+            "subid":"66aacb6e",
+            "titleid":"7498fb38",
+            "descid":"32816100",
+            "description": "A full stack allaround designer that may or may not include a guide for specific createive"
+          },
+          {
+            "type": "service",
+            "image": "/images/ser4.png",
+            "title": "PROMOTE",
+            "id":"3722284b",
+            "subid":"5c72b08b",
+            "titleid":"3bd83e70",
+            "descid":"1ac83f34",
+            "description": "Tellus pharetra erat tristique erat donec dignissim etiam sed malesuada enim sodales"
+          }
+        ]
+      }
+    ]
+  }
+  

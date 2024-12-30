@@ -8,10 +8,16 @@ import { useRouter } from "next/router";
 interface ToggleHolderProps {
   open: () => void;
   openVal: boolean;
+  dynamicSection: string;
 }
 
-const ToggleHolder: React.FC<ToggleHolderProps> = ({ open, openVal }) => {
+const ToggleHolder: React.FC<ToggleHolderProps> = ({
+  open,
+  openVal,
+  dynamicSection,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeSection, setActiveSection] = useState<string>("");
   const sections = [
     "home",
     "services",
@@ -23,27 +29,37 @@ const ToggleHolder: React.FC<ToggleHolderProps> = ({ open, openVal }) => {
   ];
   const router = useRouter();
   const pathname = usePathname();
-  const [activeSection, setActiveSection] = useState<string>("");
-
   const isHomePage = pathname === "/";
-
   useEffect(() => {
     if (isHomePage) {
-      const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      const scrollPosition = localStorage.getItem("scrollPosition");
+      if (scrollPosition) {
+        window.scrollTo(0, parseInt(scrollPosition, 10));
+        localStorage.removeItem("scrollPosition");
+      }
+      const scrollRoot = document.querySelector("[data-scroller]");
+      const options = {
+        root: scrollRoot || null,
+        rootMargin: "0px",
+        threshold: 0.3,
+      };
+      const onIntersect = (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            setActiveSection(id);
-            const pageIndex = sections.indexOf(id) + 1;
+          if (dynamicSection === "portfolio") {
+            setActiveSection(dynamicSection);
+            const pageIndex = sections.indexOf(dynamicSection) + 1;
             setCurrentPage(pageIndex);
+          } else {
+            const section = entry.target.getAttribute("id");
+            if (entry.isIntersecting && section) {
+              setActiveSection(section);
+              const pageIndex = sections.indexOf(section) + 1;
+              setCurrentPage(pageIndex);
+            }
           }
         });
       };
-
-      const observer = new IntersectionObserver(handleIntersection, {
-        threshold: 0.3,
-      });
-
+      const observer = new IntersectionObserver(onIntersect, options);
       sections.forEach((section) => {
         const sectionElement = document.getElementById(section);
         if (sectionElement) {
@@ -62,9 +78,7 @@ const ToggleHolder: React.FC<ToggleHolderProps> = ({ open, openVal }) => {
     } else {
       setCurrentPage(1);
     }
-  }, [isHomePage]);
-
-  useEffect(() => {}, [currentPage]);
+  }, [sections, isHomePage]);
 
   return (
     <div className="toggle-holder">

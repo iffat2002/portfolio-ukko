@@ -1,7 +1,7 @@
 "use client";
 
 import HeaderHolder from "../HeaderHolder/HeaderHolder";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ToggleHolder from "../ToggleHolder/ToggleHolder";
 import data from "./portfolio.json";
 import { motion } from "framer-motion";
@@ -9,16 +9,12 @@ import SwiperLayout from "./Layouts/SwiperLayout";
 import GridLayout from "./Layouts/GridLayout";
 import SimpleLayout from "./Layouts/SimpleLayout";
 
-
 interface PortfolioPreviewProps {
   id: Number;
   onBack: () => void;
 }
 
-const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({
-id,
-  onBack,
-}) => {
+const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ id, onBack }) => {
   const current = data.filter((item) => item.id === id)[0];
   const [open, setOpen] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
@@ -26,15 +22,13 @@ id,
   const closeMenu = () => setOpen(false);
 
   const handleBackClick = () => {
-    setIsFadingOut(true); 
+    setIsFadingOut(true);
     const timeoutId = setTimeout(() => {
       onBack();
-    }, 500); 
+    }, 500);
     return () => clearTimeout(timeoutId);
   };
-  
 
-  
   const renderLayout = () => {
     switch (current.layout) {
       case "simple-layout":
@@ -47,7 +41,6 @@ id,
             texts={current.texts}
           />
         );
-
       case "grid-layout":
         return (
           <GridLayout
@@ -58,7 +51,6 @@ id,
             link={current.link}
           />
         );
-
       case "swiper-layout":
         return (
           <SwiperLayout
@@ -68,13 +60,13 @@ id,
             desc={current.desc}
           />
         );
-
       default:
         return null;
     }
   };
+
   return (
-    <div  className={`portfolio-page ${isFadingOut ? 'fade-out' : ''}`} >
+    <div className={`portfolio-page ${isFadingOut ? "fade-out" : ""}`}>
       <motion.div
         initial={{ opacity: 0, y: 70 }}
         whileInView={{

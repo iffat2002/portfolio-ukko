@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { Play } from "lucide-react";
 import { jarallax, jarallaxVideo } from "jarallax";
 import "jarallax/dist/jarallax.min.css";
 import {motion } from 'framer-motion';

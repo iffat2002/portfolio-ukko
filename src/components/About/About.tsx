@@ -1,5 +1,6 @@
 import React from "react";
-import {motion} from 'framer-motion' 
+import { motion } from "framer-motion";
+
 const About = () => {
   return (
     <section
@@ -8,9 +9,12 @@ const About = () => {
       data-element_type="section"
       id="about"
     >
-      <motion.div   initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }} className="elementor-container elementor-column-gap-no">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="elementor-container elementor-column-gap-no"
+      >
         <div
           className="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-3eef4c01"
           data-id="3eef4c01"
@@ -57,7 +61,6 @@ const About = () => {
                 velit urna morbi mauris.
               </div>
             </div>
-
             <div
               className="elementor-element elementor-element-30e1d31e extra-width parallax_0_-30 elementor-widget elementor-widget-image"
               data-id="30e1d31e"

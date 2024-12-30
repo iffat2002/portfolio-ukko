@@ -1,12 +1,18 @@
-import React from 'react';
+import React from "react";
+
+type GridLayoutProps = {
+  title: string;
+  subtitle: string;
+  desc: string[];
+  imgs: string; 
+  link: string;   
+};
 
 
-const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
+const GridLayout: React.FC<GridLayoutProps>  = ({ title, subtitle, desc, imgs, link }) => {
   return (
     <div className="nature-preview">
-      <div
-        className="elementor-widget-wrap elementor-element-populated content_data mt-0"
-      >
+      <div className="elementor-widget-wrap elementor-element-populated content_data mt-0">
         <div
           className="elementor-element elementor-element-81ce8d7 elementor-widget elementor-widget-heading"
           data-id="81ce8d7"
@@ -19,18 +25,14 @@ const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
             </h2>
           </div>
         </div>
-
         <div
           className="elementor-element elementor-element-e7b4a8f elementor-widget__width-initial elementor-widget elementor-widget-text-editor"
           data-id="e7b4a8f"
           data-element_type="widget"
           data-widget_type="text-editor.default"
         >
-          <div className="elementor-widget-container">
-            {subtitle}
-          </div>
+          <div className="elementor-widget-container">{subtitle}</div>
         </div>
-
         {desc?.map((desc, index) => (
           <div
             key={index}
@@ -45,16 +47,12 @@ const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
             />
           </div>
         ))}
-
         <a href={link}>
-          <div
-            className="block center-relative more-posts-portfolio-holder mt-0"
-          >
+          <div className="block center-relative more-posts-portfolio-holder mt-0">
             <span className="more-posts-portfolio">READ MORE</span>
           </div>
         </a>
       </div>
-
       <img
         src={imgs[0]}
         decoding="async"
@@ -63,7 +61,10 @@ const GridLayout = ({ title, subtitle, desc, imgs, link }) => {
         className="main-photo"
         alt={title}
         data-jarallax-element="0 -30"
-        srcSet={`${imgs[0]} 536w, ${imgs[0].replace(".jpg", "-194x300.jpg")} 194w`}
+        srcSet={`${imgs[0]} 536w, ${imgs[0].replace(
+          ".jpg",
+          "-194x300.jpg"
+        )} 194w`}
         sizes="(max-width: 536px) 100vw, 536px"
       />
     </div>

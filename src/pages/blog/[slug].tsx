@@ -13,88 +13,59 @@ const BlogPage = () => {
   const [open, setOpen] = useState(false);
   const currentIndex = data.findIndex((el) => router?.query?.slug === el.slug);
   const current = data[currentIndex];
+
   if (!router?.query?.slug) {
     return <div>Blog not found</div>;
   }
+
   const openMenu = () => setOpen(!open);
   const closeMenu = () => setOpen(false);
 
   return (
     <>
-      {" "}
       <Head>
-        <title>{current.title}</title>
+        <title>{current?.title}</title>
         <meta name="description" content="A designer portfolio page" />
         <meta name="keywords" content="Next.js, SEO, React" />
-      </Head>{" "}
+      </Head>
       <main>
-        {" "}
-        <motion.div
-          id="content"
-          className="site-content center-relative"
-        >
+        <motion.div id="content" className="site-content center-relative">
           <div className="blog-content-holder content-800 post-181 page type-page status-publish hentry">
             <div className="content-670">
-              <div
-                data-elementor-type="wp-page"
-                data-elementor-id="181"
-                className="elementor elementor-181"
-              >
+              <div data-elementor-type="wp-page" data-elementor-id="181" className="elementor elementor-181">
                 <ToggleHolder open={openMenu} openVal={open} />
-                <HeaderHolder
-                  open={openMenu}
-                  close={closeMenu}
-                  openVal={open}
-                />
+                <HeaderHolder open={openMenu} close={closeMenu} openVal={open} />
                 {current ? (
                   <div className="content_wrap_blog">
                     <div className="content_data_blog">
                       <h1>{current.title}</h1>
                       <div className="details">
-                        <span>{current.author}</span>{" "}
-                        <span>{current.date}</span>{" "}
-                        <span className="global-color ">
-                          {current.category}
-                        </span>
+                        <span>{current.author}</span>
+                        <span>{current.date}</span>
+                        <span className="global-color">{current.category}</span>
                       </div>
                       <div className="img-content_blog">
-                        <img
-                          src={current.imgs}
-                          alt=""
-                          className="slide_img_blog"
-                        />
+                        <img src={current.imgs} alt="" className="slide_img_blog" />
                       </div>
-
                       <div
                         dangerouslySetInnerHTML={{ __html: current.desc }}
                         className="body_blog elementor-widget-container"
                       ></div>
                       <div className="bottom_nav">
-                        <Link
-                          href={`/blog/${data[currentIndex + 1]?.slug}`}
-                          className="item text-center md:text-left"
-                        >
+                        <Link href={`/blog/${data[currentIndex + 1]?.slug}`} className="item text-center md:text-left">
                           {data[currentIndex + 1] && (
                             <>
                               <span className="top">Previous Story</span>
-                              <span className="title">
-                                {data[currentIndex + 1].title}
-                              </span>
+                              <span className="title">{data[currentIndex + 1].title}</span>
                             </>
                           )}
                         </Link>
                         <div className="divider">.</div>
-                        <Link
-                          href={`/blog/${data[currentIndex - 1]?.slug}`}
-                          className="item text-center md:text-right mb-20"
-                         
-                        >
+                        <Link href={`/blog/${data[currentIndex - 1]?.slug}`} className="item text-center md:text-right mb-20">
                           {data[currentIndex - 1] && (
                             <>
                               <span className="top">Next Story</span>
-                              <span className="title">
-                                {data[currentIndex - 1].title}
-                              </span>
+                              <span className="title">{data[currentIndex - 1].title}</span>
                             </>
                           )}
                         </Link>
@@ -102,7 +73,7 @@ const BlogPage = () => {
                     </div>
                   </div>
                 ) : (
-                  <div>NO Blog found for this slug : {router?.query?.slug}</div>
+                  <div>NO Blog found</div>
                 )}
               </div>
             </div>

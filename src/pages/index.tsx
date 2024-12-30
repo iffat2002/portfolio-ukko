@@ -14,11 +14,14 @@ import Skills from "../components/Skills/Skills";
 import Contact from "../components/Contact/Contact";
 import { motion } from "framer-motion";
 
-
 export default function Page() {
   const [open, setOpen] = useState(false);
+  const [dynamicSection, setdynamicSection] = useState<string>("");
 
-  
+  const updateSectionActive = (section: string) => {
+    setdynamicSection(section);
+  };
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       import("jarallax").then(({ jarallax, jarallaxElement }) => {
@@ -31,8 +34,6 @@ export default function Page() {
           speed: 0.2,
         });
       });
-
-      
     }
   }, []);
 
@@ -47,16 +48,22 @@ export default function Page() {
         <meta name="keywords" content="Next.js, SEO, React" />
       </Head>
       <main>
-        <ToggleHolder open={openMenu} openVal={open} />
-        <HeaderHolder open={openMenu} close={closeMenu} openVal={open} />
-        <div
-          id="content"
-          className="site-content center-relative"
-        >
+        <ToggleHolder
+          open={openMenu}
+          openVal={open}
+          dynamicSection={dynamicSection}
+        />
+        <HeaderHolder
+          open={openMenu}
+          close={closeMenu}
+          openVal={open}
+          dynamicSection={dynamicSection}
+          updateSectionActive={updateSectionActive}
+        />
+        <div id="content" className="site-content center-relative">
           <div className="content-holder content-800 post-181 page type-page status-publish hentry">
             <div className="content-670">
               <div
-
                 data-elementor-type="wp-page"
                 data-elementor-id="181"
                 className="elementor elementor-181"
@@ -64,11 +71,9 @@ export default function Page() {
                 <Element name="home">
                   <Home />
                 </Element>
-
                 <Element name="services">
                   <Services />
                 </Element>
-
                 <Element name="about">
                   <About />
                 </Element>
